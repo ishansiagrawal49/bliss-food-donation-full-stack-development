@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+    <head>
+        <title>
+            User Feedback - Bliss
+        </title>
+        <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="user_feedback_1.css" type="text/css" rel="stylesheet">
+        <link href="user_feedback_2.css" type="text/css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Maiden+Orange" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Aldrich" rel="stylesheet">
+        <meta name="description" content="Here you can give your valuable feedback of this website named Bliss.">
+        <script>
+            $(function(){
+                // $(".bottomload").hide();
+                function uiReview(){
+                    $.get("rating.php",function(data){
+                        $("#show_review").html(data);
+                    });
+                }
+                uiReview();
+                // $('head').append('<link href="k.css" type="text/css" rel="stylesheet">');
+                $("#load_more").hide();
+                put="";
+                count=0;
+                clicked=0;
+                start=0;
+                function getData(){
+        
+                 $.post('get_user_feedback.php',{start:start},function(data){
+                    $(".bottomload").hide();
+                    var pos=data.lastIndexOf("count");
+                    count_string=data.substr(pos,data.length-1);
+                    data=data.substr(0,pos-1);
+                    var count=parseInt(count_string.substr(6));
+                    if(count==5)
+                    {
+                        data+="";
+                        $(".load_more").hide();
+                    }
+                    else{
+                        $(".load_more").hide();
+                    }
+                    put+=data;
+                    $("#ratings").html(put);
+                    var starSpan=$(".getStars");
+                 starSpan.each(function(){
+                     
+                     if($.trim($(this).html())!=""){
+
+                     }
+                     else{
+                         var numb=parseInt($(this).attr('id'));
+                            var str="";
+                            for(var i=1;i<=5;i++){
+                                if(i<=numb){
+                                    str+="<span class='fa fa-star checked'></span>";
+                                }
+                                else{
+                                    str+="<span class='fa fa-star'></span>";
+                                }
+                            }
+                            str="<span class='rev'>"+str;
+                            str+="</span>";
+                            $(this).html(str);                            
+
+                     }
+                 });
+                 });
+                 
+                }
+                getData();
+                // $('head').append('<link href="k1.css" type="text/css" rel="stylesheet">');
+                $(".load_more").click(function(event){
+                    clicked++;
+                    start=clicked*5;
+                    $(".bottomload").show();
+                    getData();
+
+                });
+                rating=-1;
+                $("[name='star']").click(function(event){
+                    var string=event.target.id;
+                    rating=string[4];
+                    var i=0;
+                    for(i=0;i<rating;i++){
+                        $("[name='star']").eq(i).addClass("checked");
+                    }
+                    for(i=rating;i<5;i++)
+                    {
+                        $("[name='star']").eq(i).removeClass("checked");
+                    }
+                });
+                $("[name='star']").hover(function(event){
+                    var string=event.target.id;
+                    newrating=string[4];
+                    var i=0;
+                    for(i=0;i<newrating;i++){
+                        $("[name='star']").eq(i).addClass("checked2");
+                    }
+                    for(i=newrating;i<5;i++)
+                    {
+                        $("[name='star']").eq(i).removeClass("checked2");
+                        $("[name='star']").eq(i).removeClass("checked");
+                    }
+                },
+            function(event){
+                for(i=0;i<5;i++)
+                    {
+                        if(!$("[name='star']").eq(i).hasClass("checked"))
+                        {
+                        $("[name='star']").eq(i).removeClass("checked2");
+                        }
+                    }
+            }
+            );
+                $("#btnSubmit").click(function(){
+                    var nameErr="";
+                    var ratingErr="";
+                    var reviewErr="";
+                    var name=$("#txtName").val();
+                    var review_content=$("#txtReview").val();
+                    //var reg = /[0-9]/i;
+                    var reg1 = /[!@#$%^&*()+{}|"':;,?<>]/i;
+                    // var reg = new RegExp(/[0-9]/i);
+                    // var reg1 = new RegExp(/[`~!@#$%^&*()-_=+{}"':;<,>?/|]/i);
+                    if($.trim(name)=="")
+                    {
+                        nameErr="Enter your name";
+                        $("#nameErr").html(nameErr);
+                    }
+                    else{
+                        $("#nameErr").html("");
+                    }
+                    if(reg1.test(name)){
+                        nameErr="Special characters not allowed";
+                        $("#nameErr").html(nameErr);
+                    }
+                    else{
+                        $("#nameErr").html("");
+                    }
+                 
+                    if($.trim(review_content)==''){
+                        reviewErr='Please Enter a Review';
+                    }
+                    else{
+                        reviewErr="";
+                    }
+                    $("#reviewErr").html(reviewErr)
+                    if(rating==-1){
+                        ratingErr="Please give a rating";
+                        $("#ratingErr").html(ratingErr);
+                    }
+                    else{
+                        $("#ratingErr").html("");
+                    }
+                    if(nameErr==""&&ratingErr==""&&reviewErr==""){
+                        var review=$("#txtReview").val();
+                        $.post("user_feedback_insert.php",{
+                            name:name,
+                            rating:rating,
+                            review:review
+                        },function(data){
+                            
+                            $("#message").html(data);
+
+                            start=0;
+                            clicked=0;
+                            put="";
+                            uiReview();
+                            getData();
+                            $('html,body').animate({
+                            scrollTop:$("#message").offset().top
+                            },800,function(){});
+                            $("#txtName").val("");
+                            $("#txtReview").val("");
+                        })
+                    }
+                   
+                    
+                });
+                $(window).scroll(function() {
+        //   alert($(window).innerHeight()+" "+$(window).scrollTop()+" "+$(document).innerHeight());        
+        if($(window).scrollTop() + $(window).innerHeight()== $(document).innerHeight()) {
+        
+       $(".load_more").click();
+   }
+});
+            });
+        </script> 
+        <style>
+            .checked{
+                color:orange;
+            }
+            .err{
+                color:red;
+            }
+        </style>   
+  <script>
+  
+  
+    $(function(){
+    
+      $(window).load(function(){  
+    $(".image_cont,.image_load,.cont-cont").hide();
+  });
+  });
+  
+  </script>  
+  </head>
+  <body> 
+  <div class "image_cont">
+        <div class="cont-cont">
+        </div>
+      <img src="https://media.giphy.com/media/N256GFy1u6M6Y/giphy.gif" class="image_load">
+  </div>
+        <div id="show_review">
+
+        </div>
+        
+        <br>
+        <br>
+        <br>
+        <div id="user-feedback">
+            <h2 class="header">Give Your Review</h2>
+            <form name="feedback" class="form">
+                <span class="td">Name:</span><span class="err" id="nameErr"></span><br>
+                <br><input type="text" placeholder="Enter your Name" id="txtName"><br>
+                <br><br><span class="td">Ratings:</span><span class="err" id="ratingErr"></span><br>
+                <br><span class="fa fa-star" name="star" id="star1"></span>
+                <span class="fa fa-star" name="star" id="star2"></span>
+                <span class="fa fa-star" name="star" id="star3"></span>
+                <span class="fa fa-star" name="star" id="star4"></span>
+                <span class="fa fa-star" name="star" id="star5"></span>
+            <br><br><br><br><span class="td">Review:</span><span class="err" id="reviewErr"></span><br>
+            <br><textarea id="txtReview">
+               
+            </textarea>
+            <br>
+            <br><br><input type="button" value="SUBMIT YOUR REVIEW" id="btnSubmit">
+            </form>
+            <br>
+            <div id="message">
+                
+            </div>
+            <br>
+            <div id="ratings">
+
+                </div>
+                <br>
+                <br>
+                <br>
+                <span class="load_more">CLICK TO LOAD MORE REVIEWS...</span>
+                <br>
+                <br>
+        </div>
+        <img src='loading.gif' class="bottomload" alt="load_feedback">
+    </body>
+</html>

@@ -1,0 +1,133 @@
+<html>
+<head>
+    <title>
+        Pick Donation Date And Time - Bliss</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+    <script src="picker.js" type="text/javascript"></script>
+    <script src="picker.date.js" type="text/javascript"></script>
+    <script src="picker.time.js" type="text/javascript"></script>
+    <script src="legacy.js" type="text/javascript"></script>
+    <link href="default.css" rel="stylesheet" type="text/css">
+    <link href="default.date.css" rel="stylesheet" type="text/css">
+    <link href="default.time.css" rel="stylesheet" type="text/css">
+    <link href="style_date.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Amaranth" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Bevan" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Rakkas" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Vollkorn|Aldrich|Righteous|Maiden+Orange" rel="stylesheet"> 
+<meta name="description" content="Here you can fix your desired date and time to make your donation request to the selected NGO.">
+
+
+<script>
+    $(function(){
+        query=window.location.search.substring(1);
+        // alert(query);
+        $("span").hide();
+        // if("<?php echo !isset($_POST['submit_form'])?>")
+        // {
+        // $(".message").hide();
+        
+        // }
+        // else
+        // {
+        //     $(".message").fadeIn('slow');
+        // }
+        var flag=0;
+        
+        $("[type='submit']").click(function(event){
+          
+           
+            for(var i=0;i<5;i++)
+            {
+                var val=$("[type='text']").eq(i).val();
+                if(val==""){
+                    $('span').show();
+                    event.preventDefault();
+                    flag=1;
+                    break;
+                }
+            }
+            if(flag!=1){
+                $.post('http://bliss19.azurewebsites.net/app1.php?'+query,{
+                    date:$('[name="date"]').val(),
+                    time:$('[name="time"]').val(),
+                    user:$('[name="user"]').val(),
+                    user_mail:$('[name="user_mail"]').val(),
+                    user_phone:$('[name="user_phone"]').val()
+
+                },
+                function(data){
+                    alert(data);
+                }
+                );
+            }
+    
+
+        });
+        $(".datepicker").click(function(){
+        $(".datepicker").pickadate({
+            min:new Date()
+        });
+        });
+        $(".timepicker").click(function(){
+        $(".timepicker").pickatime({
+           
+        });
+        });
+        
+    });
+</script>
+<script>
+  $(function(){
+  
+    $(window).load(function(){  
+  $(".image_cont,.image_load,.cont-cont").hide();
+});
+
+
+});
+
+</script> 
+</head>
+<body> 
+<a href="http://bliss19.azurewebsites.net"><button style="position: absolute; z-index: 60; height:auto; width:auto;background-color:transparent;border:none;color:white;"><i class="fa fa-home fa-2x" aria-hidden="true"></i></button></a>
+<div class "image_cont">
+      <div class="cont-cont">
+      </div>
+    <img src="loading1.gif" class="image_load">
+</div>
+    <h3 class="header">Fix A Date and Time</h3>
+    <div class="message">
+    Your request has been taken into consideration.
+    You will be notified if the organisation accepts your offer
+    If the your request is rejected,it will be put up as a floating request
+    where all other organisations can see it.Thanks for donating!
+    </div>
+    
+    <form >
+    <span>All Fields are mandatory.Please fill them.</span><br><br>
+        <input type="text" name="date" placeholder="Click to select a Date" class="datepicker"><br>
+        <input type="text" name="time" placeholder="Click to select a Time" class="timepicker"><br>
+        <input type="text" name="user" placeholder="Enter your Name"><br>
+        <input type="text" name="user_mail" placeholder="Enter your E-mail ID"><br>
+        <input type="text" name="user_phone" placeholder="Enter your Phone Number"><br>
+          <br>
+          <br>
+          <!-- <input type="hidden" name="ngo" value="<?php echo $ngo;?>">
+          <input type="hidden" name="email_ngo" value="<?php echo $email_ngo;?>">
+          <input type="hidden" name="phone_ngo" value="<?php echo $phone_ngo;?>">
+          <input type="hidden" name="address_ngo" value="<?php echo $address_ngo;?>">
+          <input type="hidden" name="address_user" value="<?php echo $address_user;?>">
+          <input type="hidden" name="distance_taken" value="<?php echo $distance_taken;?>">
+          <input type="hidden" name="time_taken" value="<?php echo $time_taken;?>">
+          <input type="hidden" name="user_city" value="<?php echo $user_city?>"> -->
+          <input type="submit" name="submit_form" value="SUBMIT">
+
+          
+    </form>
+</body>    
+</html>

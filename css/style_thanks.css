@@ -1,0 +1,91 @@
+.container{
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    text-align:center;
+    
+}
+.radial-gradient {
+    background: #4CCEB2; /* For browsers that do not support gradients */
+    background: -webkit-radial-gradient(#4CCEB2, #2F8FD8); /* Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(#4CCEB2, #2F8FD8); /* For Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(#4CCEB2, #2F8FD8); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(#4CCEB2, #2F8FD8); /* Standard syntax */
+   }
+   .sixtydeg-gradient {
+    background: #F2C14E; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(60deg, #F2C14E, #F78154); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(60deg, #F2C14E, #F78154); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(60deg, #F2C14E, #F78154); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(60deg, #F2C14E, #F78154); /* Standard syntax */
+   }
+.start_image1 {
+    width:20%;
+    float:left;
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+  
+  }
+  h3{
+      position:absolute;
+      top:1%;
+      left:15%;
+      font-family: Bevan;
+      width:70%;
+      border-bottom:5px solid darkgoldenrod;
+      color:#000080
+  }
+  .start_image1_right{
+    width:20%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:80%;
+  }
+.img_bcg{
+    position:absolute;
+    top:0;
+    left:20%;
+    width:60%;
+    height:100%;
+    opacity:0.5;
+}
+.info_links{
+    position:absolute;
+    top:20%;
+    left:25%;
+    width:50%;
+    height:60%;
+    background-color:rgba(235, 238, 39, 0.2);
+    font-size:25px;
+    line-height: 300%;
+    text-align:center;
+}
+.list_link{
+    list-style-type: none;
+    position:absolute;
+    top:25%;
+    width:90%;
+    left:5%;
+    text-align:center;
+}
+.list_link li{
+    height:70px;
+}
+.list_link a{
+    color:maroon;
+    text-decoration: none;
+    text-transform: capitalize;
+    font-family:Bevan;
+
+}
+.list_link a:hover{
+    color:maroon;
+    text-decoration: none;
+    text-transform: capitalize;
+    border-bottom:5px solid #ffd700;  
+}

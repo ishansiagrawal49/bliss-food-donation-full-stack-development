@@ -1,0 +1,175 @@
+<html>
+<head>
+    <title>
+    Donate Food - Select Location 
+    </title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="description" content="Here you can enter your address to donate food to the nearby NGOs/organisations.">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script></script><script  defer src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyB0WxLMoI0Pzj7u4IxbKBBUdZtzrDW2Q4M"  type="text/javascript"></script>
+    <link href="select_location.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Amaranth" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bevan" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rakkas|Aldrich" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://resources/demos/style.css">
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src='picker_city.js' type='text/javascript'></script>
+    <script>
+  
+  
+            $(function(){
+            
+              $(window).load(function(){  
+            $(".image_cont,.image_load,.cont-cont").hide();
+          });
+
+          });
+          
+          </script>  
+          </head>
+          <body> 
+        <a href="http://bliss19.azurewebsites.net"><button style="position: absolute;top:0;left:0; z-index: 60; height:auto; width:auto;background-color:transparent;border:none;"><i class="fa fa-home fa-2x" aria-hidden="true"></i></button></a>
+        </button> 
+          <div class "image_cont">
+                <div class="cont-cont">
+                </div>
+              <img src="loading1.gif" class="image_load">
+          </div>
+    <h2 class="header">D O N A T E</h2>
+    <div class="container_para">
+    <p class="brief">
+        Here you can fix a time to donate food to the food charity nearest to the your location.
+        We will provide you the list of organisations arranged with respect to distance from your location
+        <br>
+        Keep Donating!
+    </p>
+    
+    <form id="donate_form" action="http://bliss19.azurewebsites.net/ngo_nearby.php" method="post">
+        <div id="star">&nbsp&nbsp*</div> &nbsp&nbsp&nbsp&nbsp<input type="text" name="address" id="from_places" placeholder="Enter Your Location"><span id="place_err"></span></span><br>
+        <div id="star">&nbsp&nbsp*</div> &nbsp&nbsp&nbsp&nbsp<input type="text" name="city" id="city" placeholder="Enter your city"><span id="city_err"></span><br>
+        <div id="star">&nbsp&nbsp*</div> &nbsp&nbsp&nbsp&nbsp<input type="text" name="state" id="state" placeholder="Enter your state"><span id="state_err"></span><br>
+              <input type="hidden" id="origin"><br>
+    <center><input type="submit" value="Enter"></center>
+    </form>
+    </div>
+    <script>
+        $(function() {
+            // add input listeners
+            google.maps.event.addDomListener(window, 'load', function () {
+                var from_places = new google.maps.places.Autocomplete(document.getElementById('from_places'));
+                google.maps.event.addListener(from_places, 'place_changed', function () {
+                    var from_place = from_places.getPlace();
+                    $('#origin').val(from_place);
+                   
+                });
+
+            });
+            var citydup=availabletags2;
+            for(i=0;i<citydup.length;i++){
+                citydup[i]=citydup[i].toLowerCase();
+            }
+            var statedup=availableTags;
+            for(i=0;i<statedup.length;i++){
+                statedup[i]=statedup[i].toLowerCase();
+            }
+            setInterval(function(){
+                var text=$("#from_places").val();
+                if($.trim(text)!='')
+                {
+                array=text.split(',');
+                for(i=0;i<array.length;i++){
+                    array[i]=$.trim(array[i]);
+                    var length=array[i].length;
+                    
+                    // for(j=length-1;j>=0;j--){
+                    //     if(array[i].charAt(j)===' '){
+                    //         length=length-1;
+                    //     }
+                    //     array[i]=array[i].substring(0,length);
+                    // }
+                    }
+                    l=array.length;
+                    var city_fill=array[l-3];
+                    var state_fill=array[l-2];
+                    if($.inArray(city_fill.toLowerCase(),citydup)!=-1){
+                        $("[name='city']").val(city_fill);
+                   
+                    }
+                    else{
+                    $("[name='city']").val('');
+                    }
+
+                      if($.inArray(state_fill.toLowerCase(),statedup)!=-1){
+                        $("[name='state']").val(state_fill);
+                   
+                    }
+                    else{
+                    $("[name='state']").val('');
+                    }
+                    
+
+
+                
+                }
+            },100);
+          
+            
+            $("#donate_form").submit(function(event){
+               
+                // alert('hey');
+                //     geocoder.geocode({'address':from_address}, function(results, status) {
+                //     alert(status);
+                //         if (status === 'OK') {
+                //         alert(results[0]);
+                     
+                //     } else {
+                //         alert('Geocode was not successful for the following reason: ' + status);
+                //     }
+                //     });
+                var place=$("#from_places");
+                var city=$("[name='city']");
+                var state=$("[name='state']");
+             
+                if(place.val()=="")
+                {
+                    $("#place_err").html("Location cannot be left empty");
+                   
+                }
+                else{
+                    $("#place_err").html("");
+
+                }
+                if(city.val()=="")
+                {
+                    $("#city_err").html("City cannot be left empty");
+                    
+                }
+                else{
+                    $("#city_err").html("");
+
+                }
+                if(state.val()=="")
+                {
+                    $("#state_err").html("State cannot be left empty");
+                }
+                else{
+                    $("#state_err").html("");
+
+                }
+                if(place.val()!=""&&city.val()!=""&&state.val()!="")
+                {
+                    
+                }
+                else{
+                    event.preventDefault();
+                }
+            });
+
+        });
+    
+    </script>
+</body>
+</html>
