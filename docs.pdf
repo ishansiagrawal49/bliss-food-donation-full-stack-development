@@ -1,0 +1,88 @@
+
+BLISS
+ASOCIALINITIATIVE
+“Make the change that you want to see in the world.”
+PRO
+BLEM
+Most of the food we waste is, in fact, fit for human consumption. Indians waste as much food as the whole of United
+Kingdom consumes. Supermarkets, greengrocers, bakers, our homes, farms are dumping out a large amount of food.
+These food items are then locked in a truck and dumped in landfills. Surely, we can do more sensible to food than to
+waste it.
+Whenwetalkaboutfoodwastewethrowawaywedon’ttalkaboutrottenstuff, wearetalkingaboutgoodfreshfoodthatis
+beingwastedonacolossalscale. Therealwayswillbeawaste. IamnotsounrealisticthatIthinkwecanliveinawaste-free
+world.
+Weddings, canteens, hotels, social and family functions, households throw out so much food. One such colossal waste is
+discarding food which is edible because they are of wrong shape or size. Ex: Potatoes that are of wrong shape or size or
+oranges that have a spot on its peel are discarded by the supermarkets and it goes into bins.
+AccordingtotheUnitedNationsDevelopmentProgramme,upto40%ofthefoodproducedinIndiaiswasted. Thisincludes
+farm waste, transportation waste, household level, waste from supermarkets due to the wrong shape, size etc.
+You know India is the second largest producer of food crops but it’s highly ironical that the largest hunger population
+resides in India. About 7 million children died in 2015 because of hunger/malnutrition. 20 crore Indians sleep hungry on
+any given night.
+India is home to the largest undernourished population in the world. About 14.5% of our population is undernourished.
+1 in every 4 children is malnourished. 3000 children in India die every day from diet-related issues. Hunger remains the
+number one cause of death not only in India but the entire world. AIDS, cancer etc. follows.
+So, we are observing that on one hand there is a large amount of food being wasted but on the other hand, there are
+millions who die every year due to hunger.
+WHA
+TISBEINGDONE?
+There are a large number of NGOs working in this field by collecting the excess food from marriages, functions, public
+gatherings or individuals who have excess food and are distributing it to the poor or orphanages and old age homes.
+Let me ask you a question how many NGOs do you know in your area who do such a thing and how can you contact them?
+Maybe you know a few of them or not a single one. So, I will give you a list of food charities, NGOs and will also show you
+what is the problem.
+There are many more organizations which can be contacted on their telephone numbers. Some of them have their web-
+sites as well but we don’t even know their names so how can we contact them?
+WHA
+TDOWEPROPOSE?
+You all must have heard of Trivago. It is not a hotel website but a website that searches for a hotel in a particular area and
+compares them and helps you contact them without taking much pain.
+Our website is quite similar. If you want to donate you don’t have to search for an NGO in your area and then contact them.
+We will do all that for you. You just have to visit our website and pick a date and time and if you wish you can see the NGOs
+active in your area and choose your preferred NGO.
+NextquestioncomingtoyourmindwouldbewhyNGOswillgetregisteredtoourwebsite? Well, NGOsareinafightagainst
+hunger and food waste and if they could find a helping hand they would surely take it.
+WHA
+TDOWEDO?
+An organization which wishes to accept donation requests and distributes it registers itself on our website. In this step,
+they provide their address and other contact details.
+This way we have a network of organizations.
+Nowanyonerangingfromrestaurants, supermarkets, andothercommonpeoplecanmakedonationrequests. Theyspec-
+ify their address. We calculate the distance and time required between user’s location and all the registered organizations
+in the city and sort them according to the distance. With this, we also show the location of both user and NGO on a map.
+Here the user can select his/her preferred organization. Once the user selects an organization, the NGO gets a notification
+to either accept it or reject it. If the NGO excepts it, the work is done and both user and NGO receive a mail regarding each
+other’s contact details. If the NGO declines it, the request made by the user is treated as a floating one.
+Now through the services portal specifically created by us for the organizations, NGOs can select the user according to its
+convenience. This way we are ensuring higher chances for the donation request to be successful.
+DET
+AILEDWORKING
+Registration
+:
+New NGOs will provide their e-mail ID on which an OTP will be sent to verify credibility*- of the e-mail ID and also e-mail
+will be searched in the database to restrict multiple registrations on our website through same e-mail ID.
+Oncethee-mailhasbeenverifiedtheuserwillberedirectedtotheregistrationpageonwhichhecanprovidedetailsabout
+his organization. Then the data provided by the user is verified through PHP (with the help of regex) for mistakes (like the
+phone number is of 10 digits, the password should be strong, the address should be valid etc.) From a security point of
+view, the registration page can’t be opened directly without going through the e-mail verification stage. If anyone tries to
+open the registration page directly then he/she will be redirected to the e-mail verification page.
+MANAGE YOUR ACCOUNT
+:
+The user will be redirected to a login page where he can log in by providing his registered e-mail and password. For in-
+creased security captcha is also included. If the password matches the user is redirected to a management portal. Again,
+the portal can’t be opened directly without going through the login page.
+Forgot password: On the login, page user can find a link to forget password page. On clicking it a new page opens which
+demands registered e-mail ID of the user. If the e-mail ID is registered in our database then a temporary password is sent
+to the user e-mail ID.
+NGO Portal provides three services
+:
+1. Pending/ Confirmed Requests- Here the registered NGOs can see the pending requests of the donors who choose that
+NGO as their preferred NGO and can confirm or reject the request.
+Also, all the accepted requests by the NGO is displayed in another section of the page along with the details of the user.
+2. Floating Requests- In this section, all the requests which are rejected by the preferred NGO of the user is displayed and
+are open to all NGO to get confirmed thus increasing the chances of the food to be utilized.
+3. Update Information- For organizations that wish to update their information in our database.
+LIST OF CONNECTED NGOs
+:
+HerethedonorscanfindalltheNGOsconnectedtoourplatformsortedaccordingtothecityinwhichtheyareactivealong
+with their ratings by the previous donors which help the donor to choose his/her preferred NGO to donate.
